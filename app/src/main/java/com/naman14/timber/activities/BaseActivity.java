@@ -219,7 +219,8 @@ public class BaseActivity extends ATEActivity implements ServiceConnection, Musi
 
     @Nullable
     @Override
-    public String getATEKey() {
+    public String getATEKey()
+    {
         return Helpers.getATEKey(this);
     }
 

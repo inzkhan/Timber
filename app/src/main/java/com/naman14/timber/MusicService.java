@@ -2322,7 +2322,8 @@ public class MusicService extends Service {
 
     private static final class Shuffler {
 
-        private final LinkedList<Integer> mHistoryOfNumbers = new LinkedList<Integer>();
+        private final LinkedList<Integer> mHistoryOfNumbers = new LinkedList
+                <Integer>();
 
         private final TreeSet<Integer> mPreviousNumbers = new TreeSet<Integer>();
 
@@ -2331,7 +2332,8 @@ public class MusicService extends Service {
         private int mPrevious;
 
 
-        public Shuffler() {
+        public Shuffler()
+        {
             super();
         }
 

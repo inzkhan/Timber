@@ -42,14 +42,15 @@ import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ItemHolder> {
 
-    private List<Album> arraylist;
+    private List<Album> albumList;
     private Activity mContext;
     private boolean isGrid;
 
     public AlbumAdapter(Activity context, List<Album> arraylist) {
-        this.arraylist = arraylist;
+        this.albumList = arraylist;
         this.mContext = context;
         this.isGrid = PreferencesUtility.getInstance(mContext).isAlbumsInGrid();
+
 
     }
 
@@ -57,18 +58,16 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ItemHolder> 
     public ItemHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         if (isGrid) {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_album_grid, null);
-            ItemHolder ml = new ItemHolder(v);
-            return ml;
+            return new ItemHolder(v);
         } else {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_album_list, null);
-            ItemHolder ml = new ItemHolder(v);
-            return ml;
+            return new ItemHolder(v);
         }
     }
 
     @Override
     public void onBindViewHolder(final ItemHolder itemHolder, int i) {
-        Album localItem = arraylist.get(i);
+        Album localItem = albumList.get(i);
 
         itemHolder.title.setText(localItem.title);
         itemHolder.artist.setText(localItem.artistName);
@@ -130,11 +129,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ItemHolder> 
 
     @Override
     public int getItemCount() {
-        return (null != arraylist ? arraylist.size() : 0);
+        return (null != albumList ? albumList.size() : 0);
     }
 
     public void updateDataSet(List<Album> arraylist) {
-        this.arraylist = arraylist;
+        this.albumList = arraylist;
     }
 
     public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -144,16 +143,16 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ItemHolder> 
 
         public ItemHolder(View view) {
             super(view);
-            this.title = (TextView) view.findViewById(R.id.album_title);
-            this.artist = (TextView) view.findViewById(R.id.album_artist);
-            this.albumArt = (ImageView) view.findViewById(R.id.album_art);
+            this.title = view.findViewById(R.id.album_title);
+            this.artist = view.findViewById(R.id.album_artist);
+            this.albumArt = view.findViewById(R.id.album_art);
             this.footer = view.findViewById(R.id.footer);
             view.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            NavigationUtils.navigateToAlbum(mContext, arraylist.get(getAdapterPosition()).id,
+            NavigationUtils.navigateToAlbum(mContext, albumList.get(getAdapterPosition()).id,
                     new Pair<View, String>(albumArt, "transition_album_art" + getAdapterPosition()));
         }
 

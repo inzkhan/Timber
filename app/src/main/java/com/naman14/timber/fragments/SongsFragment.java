@@ -57,9 +57,9 @@ public class SongsFragment extends Fragment implements MusicStateListener {
         View rootView = inflater.inflate(
                 R.layout.fragment_recyclerview, container, false);
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
+        recyclerView = rootView.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        FastScroller fastScroller = (FastScroller) rootView.findViewById(R.id.fastscroller);
+        FastScroller fastScroller = rootView.findViewById(R.id.fastscroller);
         fastScroller.setRecyclerView(recyclerView);
 
         new loadSongs().execute("");
